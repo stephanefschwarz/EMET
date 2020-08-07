@@ -3,6 +3,7 @@ from keras.layers import (concatenate, Flatten, AveragePooling1D,
                           Dropout, GlobalAveragePooling1D)
 
 from keras import (Input, Model)
+from keras.optimizers import Adadelta
 
 class TrueCNN:
 
@@ -59,6 +60,8 @@ class TrueCNN:
                              ], outputs=output)
 
         # model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
-        model.compile(optimizer='adadelta', loss='mean_squared_error', metrics=['accuracy'])
+        # model.compile(optimizer='adadelta', loss='mean_squared_error', metrics=['accuracy'])
+        opt = Adadelta(learning_rate=1.0)
+        model.compile(optimizer=opt, loss='mean_squared_error', metrics=['accuracy'])
 
         return model
